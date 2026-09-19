@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
       "./node_modules/@playwright/**",
     ],
   },
+  outputFileTracingIncludes: {
+    "/api/user/sites/*/export-nextjs": [
+      "./app/editor/layout/src/**/*",
+      "./public/fonts/**/*",
+    ],
+  },
   async redirects() {
     return [
       {

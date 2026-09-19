@@ -528,8 +528,15 @@ async function fileExists(filePath: string) {
   }
 }
 
+function editorSrcFile(rel = "") {
+  return path.join(process.cwd(), "app", "editor", "layout", "src", rel);
+}
+
 async function resolveModule(absFromFile: string, spec: string) {
-  const base = path.resolve(path.dirname(absFromFile), spec);
+  const base = path.resolve(
+    /*turbopackIgnore: true*/ path.dirname(absFromFile),
+    spec,
+  );
   const candidates = [
     base,
     `${base}.ts`,
@@ -537,8 +544,8 @@ async function resolveModule(absFromFile: string, spec: string) {
     `${base}.js`,
     `${base}.jsx`,
     `${base}.json`,
-    path.join(base, "index.ts"),
-    path.join(base, "index.tsx"),
+    path.join(/*turbopackIgnore: true*/ base, "index.ts"),
+    path.join(/*turbopackIgnore: true*/ base, "index.tsx"),
   ];
   for (const candidate of candidates) {
     if (await fileExists(candidate)) {
@@ -559,7 +566,7 @@ async function collectImportClosure(
   while (queue.length) {
     const rel = queue.pop()!.replace(/\\/g, "/");
     if (needed.has(rel)) continue;
-    const abs = path.join(srcRoot, rel);
+    const abs = editorSrcFile(rel);
     if (!(await fileExists(abs))) continue;
     if (EXCLUDE_BASENAMES.has(path.basename(abs))) continue;
     needed.add(rel);
@@ -765,7 +772,7 @@ export async function collectUsedRendererFiles(options: {
 
   const files: ZipFileEntry[] = [];
   for (const rel of Array.from(needed).sort()) {
-    const abs = path.join(options.srcRoot, rel);
+    const abs = editorSrcFile(rel);
     files.push({
       path: `${options.folderName}/renderer/${rel}`.replace(/\\/g, "/"),
       content: await fs.readFile(abs),

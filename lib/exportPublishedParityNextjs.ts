@@ -31,10 +31,7 @@ function jsonPretty(value: unknown) {
 }
 
 function frontendRoot() {
-  // Prefer apps/frontend when cwd is monorepo root; else assume cwd is frontend.
-  const cwd = /*turbopackIgnore: true*/ process.cwd();
-  if (path.basename(cwd) === "frontend") return cwd;
-  return path.join(cwd, "apps", "frontend");
+  return process.cwd();
 }
 
 async function fileExists(filePath: string) {

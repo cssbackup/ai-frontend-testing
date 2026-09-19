@@ -114,28 +114,7 @@ async function readLocalPublicFile(urlPath: string) {
     .replace(/^[/\\]+/, "");
   if (!normalized || normalized.includes("..")) return null;
 
-  const roots = [
-    path.join(/*turbopackIgnore: true*/ process.cwd(), "public"),
-    path.join(
-      /*turbopackIgnore: true*/ process.cwd(),
-      "apps",
-      "frontend",
-      "public",
-    ),
-    path.join(
-      /*turbopackIgnore: true*/ process.cwd(),
-      "..",
-      "frontend",
-      "public",
-    ),
-    path.join(/*turbopackIgnore: true*/ process.cwd(), "..", "admin", "public"),
-    path.join(
-      /*turbopackIgnore: true*/ process.cwd(),
-      "apps",
-      "admin",
-      "public",
-    ),
-  ];
+  const roots = [path.join(process.cwd(), "public")];
 
   for (const root of roots) {
     const absolute = path.join(root, normalized);
