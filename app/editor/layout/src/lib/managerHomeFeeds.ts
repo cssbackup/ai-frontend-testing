@@ -529,7 +529,12 @@ export const overlayManagerHomeFeed = (
       localSlides,
       mapServiceToSlide,
     );
-    return productSlides.length ? { productSlides, serviceSlides: productSlides } : {};
+    return productSlides.length
+      ? {
+          productSlides: productSlides as SectionData["productSlides"],
+          serviceSlides: productSlides as SectionData["serviceSlides"],
+        }
+      : {};
   }
 
   if (isHomeFeedType(section, "PortfolioPage", "PortfolioPage-")) {
@@ -593,7 +598,7 @@ const patchLibrarySection = (
         [section.variant]: {
           ...current,
           productItems: merged,
-        },
+        } as SectionData,
       },
     };
   });

@@ -557,7 +557,7 @@ export function createRedesignPreviewInteractions() {
         (c.classList.contains("hero-slide") ||
           c.hasAttribute("data-hero-slide") ||
           /\bmin-h-\[/.test(c.className) ||
-          c.querySelector("h1,h2")),
+          Boolean(c.querySelector("h1,h2"))),
     );
     if (direct.length >= 2) return direct;
   }
@@ -1598,8 +1598,9 @@ export function createRedesignPreviewInteractions() {
   let keeper =
     candidates.find((b) => b.hasAttribute("data-mobile-menu-toggle")) || candidates[0] || null;
   if (!keeper) {
-    keeper = document.createElement("button");
-    keeper.type = "button";
+    const button = document.createElement("button");
+    button.type = "button";
+    keeper = button;
     keeper.className =
       "ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-slate-200 text-slate-800 lg:hidden";
     keeper.innerHTML = `<span class="text-xl leading-none" aria-hidden="true">☰</span>`;

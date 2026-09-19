@@ -22,7 +22,7 @@ const HOME_SECTION_ORDER = [
 ] as const;
 
 type SectionItem = {
-  id: string;
+  id?: string;
   type: string;
   variant: string;
   page?: string;
@@ -48,7 +48,7 @@ export function buildRedesignHomeFromLayouts(
     if (!section) return;
     usedTypes.add(type);
     built.push({
-      id: section.id,
+      id: section.id || `${section.type}-${section.variant}`,
       type: section.type,
       variant: section.variant,
       page: section.page,

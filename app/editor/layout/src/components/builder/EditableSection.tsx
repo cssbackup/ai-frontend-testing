@@ -1032,7 +1032,9 @@ export default function EditableSection({
     return isButtonLikeHost(element) && Boolean(findClosestHref(element));
   };
 
-  const goToResolvedLink = (target: HoveredLinkNav) => {
+  const goToResolvedLink = (
+    target: Pick<HoveredLinkNav, "pageLabel" | "sectionHref" | "externalHref">,
+  ) => {
     if (target.externalHref) {
       window.open(target.externalHref, "_blank", "noopener,noreferrer");
       return;

@@ -27,8 +27,8 @@ type BlogSectionLike = {
   data?: Record<string, Record<string, unknown> | undefined>;
 };
 
-const flattenLinks = <T extends { children?: T[] }>(links: T[]): T[] =>
-  links.flatMap((link) => [link, ...flattenLinks(link.children || [])]);
+const flattenLinks = <T extends BlogLinkLike>(links: T[]): T[] =>
+  links.flatMap((link) => [link, ...flattenLinks((link.children || []) as T[])]);
 
 const normalizeHref = (href?: string) => (href || "").trim().toLowerCase();
 

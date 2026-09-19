@@ -702,7 +702,7 @@ type MenuNavItem = {
   label: string;
   href: string;
   children?: MenuNavItem[];
-  menuType?: string;
+  menuType?: "link" | "dropdown" | "mega";
   kind?: string;
 };
 
@@ -1328,7 +1328,7 @@ const rewritePublishedFooterLinks = (
         return item;
       }
       return {
-        ...record,
+        ...item,
         href: resolvePublishedNavHref({
           siteId,
           href,
@@ -1927,7 +1927,7 @@ const attachMissingSplitInnerPageSections = (
             desc2: savedData.desc2 || bodyData.desc2 || preview.desc2,
           },
         },
-      },
+      } as SectionItem,
       ...next.slice(insertAt),
     ];
   }
@@ -1978,7 +1978,7 @@ const attachMissingSplitInnerPageSections = (
             bodyData,
           ),
         },
-      },
+      } as SectionItem,
       ...next.slice(insertAt),
     ];
   }
@@ -2136,7 +2136,9 @@ const readPublishedEvents = (
           typeof record.eventDate === "string" ? record.eventDate : "",
         eventTime:
           typeof record.eventTime === "string" ? record.eventTime : "",
-        eventType: record.eventType === "past" ? "past" : "upcoming",
+        eventType: (record.eventType === "past" ? "past" : "upcoming") as
+          | "upcoming"
+          | "past",
       };
     })
     .filter((item) => item.title && item.active !== false);
@@ -4495,7 +4497,7 @@ function PublishedSiteContent({
               homeLabel: savedData.homeLabel || preview.homeLabel || "Home",
             },
           },
-        };
+        } as SectionItem;
       });
     }
     return orderChromeSections(

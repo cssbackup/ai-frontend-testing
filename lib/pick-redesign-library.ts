@@ -5,6 +5,7 @@
  */
 
 import {
+  getBuilderTemplates,
   getCategoriesForOnboarding,
   getTemplatesForCategory,
   refreshCategoryContentFromApi,
@@ -130,6 +131,6 @@ export async function pickRedesignLibraryPack(options: {
   return {
     category,
     templateId: chosen.id,
-    templateName: chosen.name || chosen.id,
+    templateName: chosen.title || chosen.id,
   };
 }

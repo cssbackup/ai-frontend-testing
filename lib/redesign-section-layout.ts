@@ -315,7 +315,7 @@ function normalizeHorizontalMediaCards(html: string) {
       if (!/\bflex-col\b/.test(nextClasses)) nextClasses = `${nextClasses} flex-col`.trim();
       if (!/\boverflow-hidden\b/.test(nextClasses)) nextClasses = `${nextClasses} overflow-hidden`.trim();
 
-      let nextInner = inner.replace(/<img\b([^>]*)>/i, (imgFull, imgAttrs) => {
+      let nextInner = inner.replace(/<img\b([^>]*)>/i, (_imgFull: string, imgAttrs: string) => {
         let cls = (imgAttrs.match(/\bclass=(["'])([^"']*)\1/i)?.[2] || "").replace(/\s+/g, " ").trim();
         cls = cls
           .replace(/\bh-(?:\[.*?\]|\d+)\b/g, "")
@@ -335,7 +335,7 @@ function normalizeHorizontalMediaCards(html: string) {
       // Media wrappers that forced a short landscape strip.
       nextInner = nextInner.replace(
         /<(div)(\s[^>]*\bclass=(["'])([^"']*)\3[^>]*)>\s*(<img\b[^>]*>)\s*<\/div>/i,
-        (_m, dTag, dOpen, dq, dCls, img) => {
+        (_m: string, dTag: string, dOpen: string, dq: string, dCls: string, img: string) => {
           let wrap = dCls
             .replace(/\bw-(?:\[.*?\]|\d+|1\/\d+|full)\b/g, "")
             .replace(/\bh-(?:\[.*?\]|\d+)\b/g, "")

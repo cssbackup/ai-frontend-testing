@@ -647,7 +647,7 @@ const createDefaultSectionData = (
       title: "Let us help you find the right next move.",
       buttons: [
         { label: "Browse properties", href: "/buy-a-property" },
-        { label: "Contact us", href: "/contact", secondary: true },
+        { label: "Contact us", href: "/contact", variant: "secondary" },
       ],
     };
 

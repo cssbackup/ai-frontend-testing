@@ -2927,7 +2927,7 @@ export default function EditSectionModal({
         desc1: typeof data.desc2 === "string" ? data.desc2 : "",
         desc2:
           typeof data.philosophyDesc === "string" ? data.philosophyDesc : "",
-        promises,
+        promises: promises.map((item) => item.title),
       },
     });
   }, [activeSectionKey, activeVariant, currentSection, onUpdateSectionData]);

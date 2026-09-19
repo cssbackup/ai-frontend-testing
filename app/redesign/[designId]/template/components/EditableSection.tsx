@@ -1353,7 +1353,7 @@ export default function EditableSection({
           onDoubleClickCapture={startInlineEditing}
           onInputCapture={handleSectionInput}
           onBlurCapture={finishInlineEditing}
-          dangerouslySetInnerHTML={{ __html: customHtml }}
+          dangerouslySetInnerHTML={{ __html: customHtml ?? "" }}
         />
       ) : null}
 

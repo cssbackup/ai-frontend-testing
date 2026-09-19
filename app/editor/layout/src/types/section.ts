@@ -313,6 +313,7 @@ export type SectionData = {
   overlayColor?: string;
 
   desc?: string;
+  desc1?: string;
   desc2?: string;
 
   buttonBackground?: string;

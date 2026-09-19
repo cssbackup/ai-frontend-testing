@@ -3029,7 +3029,9 @@ const readEventItemsFromData = (data: SectionData): EventItem[] => {
           typeof item.seoKeywords === "string" ? item.seoKeywords : "",
         eventDate: typeof item.eventDate === "string" ? item.eventDate : "",
         eventTime: typeof item.eventTime === "string" ? item.eventTime : "",
-        eventType: item.eventType === "past" ? "past" : "upcoming",
+        eventType: (item.eventType === "past" ? "past" : "upcoming") as
+          | "upcoming"
+          | "past",
       }))
       .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   }
@@ -3122,7 +3124,9 @@ const applyEventPageStateToData = (
     seoKeywords: eventItem.seoKeywords || "",
     eventDate: eventItem.eventDate || "",
     eventTime: eventItem.eventTime || "",
-    eventType: eventItem.eventType === "past" ? "past" : "upcoming",
+    eventType: (eventItem.eventType === "past" ? "past" : "upcoming") as
+      | "upcoming"
+      | "past",
   }));
 
   const visibleEvents = orderedEvents.filter(
@@ -4649,7 +4653,7 @@ const renamePageSections = (
 
     return {
       ...section,
-      id: section.id.replace(
+      id: (section.id || "").replace(
         new RegExp(`${oldSlug}$`),
         newSlug,
       ),
@@ -9858,7 +9862,8 @@ function EditorPage({
     if (!didUpdate) return;
 
     urgentAutosaveRef.current = true;
-    if (syncedMenuLinks) {
+    const menuLinks: EditorPageLink[] = syncedMenuLinks ?? [];
+    if (menuLinks.length) {
       setPageLinks((current) => {
         const documents = current.filter((link) => link.kind === "document");
         const blogPosts = flattenPageLinks(current)
@@ -9867,7 +9872,7 @@ function EditorPage({
 
         // Header menu is the source of truth after inline rename (Home,
         // section links, blog index). Keep documents + blog posts separately.
-        const nextNav = syncedMenuLinks.filter(
+        const nextNav = menuLinks.filter(
           (link) => link.kind !== "blog" && link.kind !== "document",
         );
 
@@ -16185,23 +16190,25 @@ function EditorPage({
     if (useRealEstateDetail) {
       const featureRows = [
         item.bedrooms
-          ? { label: "Bedrooms", value: item.bedrooms }
+          ? { title: "Bedrooms", desc: item.bedrooms }
           : null,
         item.areaSqft
           ? {
-              label: "Area",
-              value: /sq\.?\s*ft|sqft/i.test(item.areaSqft)
+              title: "Area",
+              desc: /sq\.?\s*ft|sqft/i.test(item.areaSqft)
                 ? item.areaSqft
                 : `${item.areaSqft} sq.ft`,
             }
           : null,
         item.bathrooms
-          ? { label: "Bathrooms", value: item.bathrooms }
+          ? { title: "Bathrooms", desc: item.bathrooms }
           : null,
         item.parking
-          ? { label: "Parking", value: item.parking }
+          ? { title: "Parking", desc: item.parking }
           : null,
-      ].filter(Boolean);
+      ].filter(
+        (row): row is { title: string; desc: string } => Boolean(row),
+      );
       return (
         <RealEstatePropertyDetail1
           key={`master-detail-${master}-${slug}`}

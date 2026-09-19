@@ -8,6 +8,8 @@ import {
   useMemo,
   useRef,
   useState,
+  type Dispatch,
+  type SetStateAction,
 } from "react";
 import { useSearchParams } from "next/navigation";
 import {
@@ -179,7 +181,7 @@ type PreviewContextType = {
   setActiveRentalItemsPerPage?: (value: number) => void;
   setViewportMode: (mode: "desktop" | "mobile") => void;
   setCurrentPage: (page: string) => void;
-  setPageLinks: (links: PageLink[]) => void;
+  setPageLinks: Dispatch<SetStateAction<PageLink[]>>;
   setThemeVariables: (vars: Record<string, string>) => void;
   patchThemeVariable: (key: string, value: string) => void;
   setSiteSeoConfig: (config: unknown) => void;

@@ -193,7 +193,9 @@ const baseClasses = {
 } as const;
 
 function getCreateAiPreviewSwalTarget(): HTMLElement {
-  if (typeof document === "undefined") return document.body;
+  if (typeof document === "undefined") {
+    return undefined as unknown as HTMLElement;
+  }
   return (
     (document.querySelector(
       '[data-cai-preview-shell="1"]',

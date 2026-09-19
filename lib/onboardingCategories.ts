@@ -99,7 +99,9 @@ export function preferCategoriesWithContent(
       if (!contentName) return null;
       return { ...category, contentName, name: contentName };
     })
-    .filter((category): category is OnboardingCategory => Boolean(category));
+    .filter((category): category is NonNullable<typeof category> =>
+      category !== null,
+    );
 
   // Never show a category that has no theme/template content.
   return withContent;

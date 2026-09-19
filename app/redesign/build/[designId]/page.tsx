@@ -643,7 +643,7 @@ function SectionRevealPreview({
 
 function BuildHeader() {
   const router = useRouter();
-  const { user, authLoading, logout } = useUserAuth();
+  const { user, loading: authLoading, logout } = useUserAuth();
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);

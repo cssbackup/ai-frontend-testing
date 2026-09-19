@@ -1178,8 +1178,8 @@ export default function BillingTab({
                         onClick={() =>
                           downloadInvoice({
                             ...invoice,
-                            customerName: user?.name,
-                            customerEmail: user?.email,
+                            customerName: user?.name ?? undefined,
+                            customerEmail: user?.email ?? undefined,
                           })
                         }
                         className="grid size-8 place-items-center rounded-lg border border-zinc-100 text-zinc-400 transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"

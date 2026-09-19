@@ -146,7 +146,7 @@ export default function PageSelection({
 
                         {isOpen && (
                           <div className="absolute left-1/2 top-[76px] z-30 w-52 -translate-x-1/2 rounded-xl border border-[#dce4f2] bg-white p-2.5 text-sm text-black shadow-[0_18px_45px_rgba(0,10,27,.16)]">
-                            {item.dropdown.map((option) => {
+                            {(item.dropdown ?? []).map((option) => {
                               const optionId = selectionKey(
                                 "header",
                                 option.id,

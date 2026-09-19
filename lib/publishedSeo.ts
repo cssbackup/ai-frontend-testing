@@ -269,9 +269,13 @@ export const isPublishedGalleryPageLink = (link: {
   return href === "#page-gallery" || label === "gallery";
 };
 
-const flattenPublishedLinks = <T extends { children?: T[] }>(
+const flattenPublishedLinks = <T extends { children?: unknown[] }>(
   links: T[],
-): T[] => links.flatMap((link) => [link, ...flattenPublishedLinks(link.children || [])]);
+): T[] =>
+  links.flatMap((link) => [
+    link,
+    ...flattenPublishedLinks((link.children || []) as T[]),
+  ]);
 
 const hasPublishedFeaturePage = (
   site:

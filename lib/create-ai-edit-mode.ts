@@ -937,7 +937,6 @@ img:hover, svg:hover {
     if (a || (btn && navish) || (navish && btn)) {
       event.preventDefault();
       event.stopPropagation();
-      // @ts-expect-error stopImmediatePropagation exists on Event in browsers
       event.stopImmediatePropagation?.();
     }
   };

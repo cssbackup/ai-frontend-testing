@@ -394,7 +394,7 @@ function buildHeroBlock(
   if (t.layout === "split") {
     const textBg = t.id === "b15-split-light" ? "#f8fafc" : "rgba(15,23,42,.92)";
     return `<section id="home" data-create-ai-hero-banner="1" data-cai-banner-style="${t.id}" style="position:relative;min-height:${t.minH};display:grid;grid-template-columns:minmax(280px,1fr) minmax(280px,1.1fr);overflow:hidden;color:#fff">
-<div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:56px 40px;background:${textBg};color:${titleColor}">${t.layout === "eyebrow" || t.id.includes("eyebrow") || t.id === "b16-editorial" ? eyebrow : ""}${title}${sub}${ctas}</div>
+<div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:56px 40px;background:${textBg};color:${titleColor}">${t.id.includes("eyebrow") || t.id === "b16-editorial" ? eyebrow : ""}${title}${sub}${ctas}</div>
 <div style="position:relative;min-height:320px">${bgLayer}<div style="position:absolute;inset:0;background:rgba(0,0,0,.15)"></div></div>
 </section>`;
   }

@@ -98,7 +98,7 @@ function parseAttachments(value: unknown): SupportAttachment[] {
         mimeType: typeof row.mimeType === "string" ? row.mimeType : undefined,
       };
     })
-    .filter((item): item is SupportAttachment => Boolean(item));
+    .filter((item): item is NonNullable<typeof item> => item !== null);
 }
 
 /** One inbox row per support ticket (older reply notifs are dropped). */

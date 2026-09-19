@@ -1038,8 +1038,12 @@ export default function BusinessOnboarding({
                   : "create-custom"
               }
               onChange={(nextValue) => {
-                setBusinessInfo(nextValue);
-                  if (isOnboardingBusinessInfoComplete(nextValue)) {
+                const nextInfo = {
+                  ...nextValue,
+                  logoImage: nextValue.logoImage ?? "",
+                };
+                setBusinessInfo(nextInfo);
+                  if (isOnboardingBusinessInfoComplete(nextInfo)) {
                   setBusinessInfoSubmitted(false);
                 }
               }}

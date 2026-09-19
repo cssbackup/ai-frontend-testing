@@ -229,7 +229,7 @@ async function sanitizeStateForOwnedSites(
   };
 }
 
-let syncTimeout: ReturnType<typeof setTimeout> | null = null;
+let syncTimeout: number | null = null;
 let userStateHydrated = false;
 
 export function queueUserStateSync() {

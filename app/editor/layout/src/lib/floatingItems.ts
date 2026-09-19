@@ -195,11 +195,13 @@ export const syncLegacyFloatingLinks = (items: FloatingItemData[]) => {
 
   return {
     whatsappLink:
-      whatsapp && whatsapp.active && whatsapp.href.trim()
-        ? whatsapp.href.trim()
+      whatsapp && whatsapp.active && (whatsapp.href || "").trim()
+        ? (whatsapp.href || "").trim()
         : "",
     callLink:
-      call && call.active && call.href.trim() ? call.href.trim() : "",
+      call && call.active && (call.href || "").trim()
+        ? (call.href || "").trim()
+        : "",
   };
 };
 
