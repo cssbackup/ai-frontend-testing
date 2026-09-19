@@ -79,7 +79,7 @@ const coreFeatures = [
   "AI-powered section and design changes",
   "Free hosting included",
   "Connect your own custom domain",
-  "Domain stays yours — client-owned domain",
+  "Domain stays yours — self-owned domain",
   "SSL included on custom domain",
 ];
 

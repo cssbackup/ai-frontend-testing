@@ -55,22 +55,42 @@ export default function HeroSection({
   return (
     <section
       data-hero-scroll
-      className="relative h-[190vh] min-h-[1250px] text-white"
+      className="relative h-[118vh] min-h-[840px] text-white md:h-[190vh] md:min-h-[1250px]"
       style={backgroundStyle}
     >
-      <div className="sticky top-0 h-screen min-h-[740px] overflow-hidden px-5 pt-[112px] sm:px-8 lg:pt-[116px]">
+      <div className="sticky top-0 h-screen min-h-[640px] overflow-hidden px-5 pt-[104px] max-md:pt-0 sm:px-8 md:min-h-[740px] md:pt-[112px] lg:pt-[116px]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0"
           style={backgroundStyle}
         />
 
+        <div className="relative z-10 flex h-full flex-col items-center justify-center gap-9 pb-16 pt-20 md:contents">
         <div
           data-hero-copy
           className="relative z-20 mx-auto max-w-[1180px] text-center"
         >
           <div data-hero-text>
-            <h1 className="text-[clamp(3rem,6.5vw,6.2rem)] font-normal leading-[.92] tracking-[-.055em]">
+            <h1 className="text-[clamp(2.35rem,8.6vw,3.75rem)] font-normal leading-[1.05] tracking-[-.055em] md:hidden">
+              <span className="block overflow-hidden pb-1">
+                <span data-hero-line className="block">
+                  Build Your
+                </span>
+              </span>
+              <span className="block overflow-hidden pb-1">
+                <span data-hero-line className="block">
+                  Website in
+                </span>
+              </span>
+              <span className="block overflow-hidden pb-2">
+                <span data-hero-line className="block">
+                  <span className="inline-block bg-lime-300 px-2.5 py-0.5 font-serif italic tracking-[-.065em] text-black">
+                    10 Minutes
+                  </span>
+                </span>
+              </span>
+            </h1>
+            <h1 className="hidden text-[clamp(3rem,6.5vw,6.2rem)] font-normal leading-[.92] tracking-[-.055em] md:block">
               <span className="block overflow-hidden pb-2">
                 <span data-hero-line className="block">
                   Build Your
@@ -109,12 +129,12 @@ export default function HeroSection({
           </Button>
         </div>
 
-        <div className="absolute left-1/2 top-[430px] z-10 w-[min(88vw,1080px)] -translate-x-1/2 [perspective:1800px] sm:top-[420px]">
+        <div className="relative z-10 w-[min(68vw,292px)] [perspective:1800px] md:absolute md:left-1/2 md:top-[420px] md:w-[min(88vw,1080px)] md:-translate-x-1/2">
           <div
             data-hero-device
             className="relative origin-top [backface-visibility:hidden] [transform-style:preserve-3d]"
           >
-            <div className="absolute -inset-16 rounded-[42%] bg-cyan-100/30 blur-[65px]" />
+            <div className="absolute -inset-8 rounded-[42%] bg-cyan-100/30 blur-[40px] md:-inset-16 md:blur-[65px]" />
             <div className="absolute -inset-7 rounded-[2.6rem] border border-white/15" />
             <div className="absolute -inset-3 rounded-[2.25rem] border border-cyan-100/25" />
             <div className="relative overflow-hidden rounded-[1.4rem] border border-white/60 bg-[#07111e] p-2.5 shadow-[0_55px_120px_rgba(5,24,111,.6),0_0_0_1px_rgba(255,255,255,.12)] sm:rounded-[2rem] sm:p-4">
@@ -141,7 +161,9 @@ export default function HeroSection({
                   alt="Lestow AI website builder dashboard"
                   fill
                   priority
-                  className="object-cover object-top"
+                  quality={95}
+                  sizes="(max-width: 767px) 828px, 1080px"
+                  className="object-cover object-top max-md:object-contain"
                 />
                 <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/5" />
               </div>
@@ -176,6 +198,7 @@ export default function HeroSection({
               health: excellent
             </div>
           </div>
+        </div>
         </div>
 
         <div

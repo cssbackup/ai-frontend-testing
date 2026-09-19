@@ -1,14 +1,21 @@
 import type { NextConfig } from "next";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const projectRoot = path.dirname(fileURLToPath(import.meta.url));
+// Use cwd so this matches Vercel's injected outputFileTracingRoot (/vercel/path0).
+// import.meta.url is undefined when Vercel re-evaluates this file in modifyConfig.
+const projectRoot = process.cwd();
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["playwright"],
+  serverExternalPackages: ["playwright", "playwright-core"],
   outputFileTracingRoot: projectRoot,
   turbopack: {
     root: projectRoot,
+  },
+  outputFileTracingExcludes: {
+    "*": [
+      "./node_modules/playwright/**",
+      "./node_modules/playwright-core/**",
+      "./node_modules/@playwright/**",
+    ],
   },
   async redirects() {
     return [

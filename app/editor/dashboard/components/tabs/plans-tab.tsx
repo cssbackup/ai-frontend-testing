@@ -8,23 +8,23 @@ import {
 } from "lucide-react";
 
 const starterFeatures = [
-  "Unlimited paid hosting sites",
-  "2 staging websites",
-  "2 pages per staged site",
-  "50 CMS items per staged site",
-  "1 full collaborator seat",
-  "Agency and freelancer guests",
+  "No limits on websites, pages, or publishing",
+  "Full website builder and editor access",
+  "Publish on a shared domain (/published/your-site-name)",
+  "Live sites work like your current published URLs",
+  "No AI content, image, or design generation",
+  "Free forever",
 ];
 
 const coreFeatures = [
   "Everything included in Starter",
-  "10 staging websites",
-  "300 pages per staged site",
-  "Unlimited AI section generation",
-  "Custom code on staged sites",
-  "Code components and export",
-  "Priority support",
-  "1 shared design library",
+  "AI content writing and editing",
+  "AI image generation and replacement",
+  "AI-powered section and design changes",
+  "Free hosting included",
+  "Connect your own custom domain",
+  "Domain stays yours — self-owned domain",
+  "SSL included on custom domain",
 ];
 
 export default function PlansTab() {
@@ -68,8 +68,8 @@ export default function PlansTab() {
               <span className="pb-1.5 text-xs text-zinc-500">/month</span>
             </div>
             <p className="mt-4 min-h-[48px] text-xs leading-5 text-zinc-500">
-              All the essentials you need to create and publish your first
-              website.
+              Free for every website. Build and publish on a shared URL. No AI
+              tools or custom domain.
             </p>
 
             <button
@@ -100,21 +100,22 @@ export default function PlansTab() {
                 <Crown size={19} />
               </span>
               <span className="rounded-full bg-blue-600 px-3 py-1 text-[9px] font-semibold uppercase tracking-wider text-white shadow-lg shadow-blue-200">
-                Best value
+                Recommended
               </span>
             </div>
 
             <div className="relative">
               <h3 className="mt-6 text-xl font-semibold text-zinc-950">Core</h3>
-              <div className="mt-3 flex items-end gap-1">
+              <div className="mt-3 flex flex-wrap items-end gap-x-1">
                 <strong className="text-5xl tracking-[-.065em] text-zinc-950">
                   $9
                 </strong>
-                <span className="pb-1.5 text-xs text-zinc-500">/month</span>
+                <span className="pb-1.5 text-xs text-zinc-500">
+                  /month per website
+                </span>
               </div>
               <p className="mt-4 min-h-[48px] text-xs leading-5 text-zinc-500">
-                More pages, AI generation, and professional tools for growing
-                websites.
+                Billed monthly. Cancel anytime. AI, hosting & custom domain.
               </p>
 
               <button

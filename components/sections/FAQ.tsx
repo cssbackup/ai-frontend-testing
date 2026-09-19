@@ -51,13 +51,13 @@ export default function FAQ() {
             </div>
 
             <div className="mx-auto max-w-[1000px]">
-                <h2 id="faq-heading" className="text-center text-3xl font-medium leading-[1.35] tracking-tight sm:text-3xl">
+                <h2 id="faq-heading" className="text-center text-[26px] font-medium leading-[1.35] tracking-tight sm:text-[35px]">
                     Curious about Lestow?
                     <br />
                     We got you covered
                 </h2>
 
-                <div className="mt-12 divide-y divide-neutral-200 sm:mt-16">
+                <div className="mt-10 divide-y divide-neutral-200 sm:mt-16">
                     {faqs.map(({ question, answer }) => (
                         <details key={question} name="homepage-faq" className="group">
                             <summary className="flex cursor-pointer list-none items-center justify-between gap-6 rounded-sm py-6 text-base font-medium leading-relaxed transition-colors hover:text-neutral-600 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-500 sm:py-6 sm:text-lg [&::-webkit-details-marker]:hidden">

@@ -1,9 +1,9 @@
 import { MessageCircle, Sparkles, SlidersHorizontal, Rocket } from "lucide-react";
 
 const steps = [
-    [MessageCircle, "Tell Us About You", "Share your business details, goals, and preferences."],
-    [Sparkles, "Generate with AI", "Our AI creates a complete website with relevant content and design."],
-    [SlidersHorizontal, "Customize Easily", "Edit text, images, colors, and sections."],
+    [MessageCircle, "Build a Website with AI", "Create a complete website from your idea, business details, and preferences."],
+    [Sparkles, "Redesign Your Existing Website", "Refresh your current website in minutes with improved design, layout, and content."],
+    [SlidersHorizontal, "Customize Without Limits", "Change themes, colors, sections, layouts, and styles to match your brand."],
     [Rocket, "Publish & Grow", "Go live in minutes and start reaching your audience."],
 ] as const;
 
@@ -12,8 +12,8 @@ export default function WhatWeDo() {
         <section id="how-it-works" className="scroll-mt-20 bg-white px-6 py-14 text-[#080e42] sm:px-10 sm:py-28 lg:pb-30 lg:pt-20" aria-labelledby="what-we-do-title">
             <div className="mx-auto max-w-[1540px] text-center">
                 {/* <p className="text-sm font-medium uppercase tracking-[0.1em] text-[#1680ff] sm:text-lg">How it works</p> */}
-                <h2 id="what-we-do-title" className="text-2xl mx-auto mt-6 sm:text-3xl font-semimedium leading-[1.12] tracking-[-0.04em]">
-                    How It <span className="text-blue-500">Works?</span>
+                <h2 id="what-we-do-title" className="text-[30px] mx-auto mt-6 sm:text-[35px] font-semimedium leading-[1.12] tracking-[-0.04em]">
+                    What We <span className="text-blue-500">Do?</span>
                 </h2>
                 <p className="mx-auto mt-1 text-base leading-relaxed text-[#747d9e] sm:text-xl lg:text-sm">Four steps. A beautiful website. No hassle.</p>
                 <ol className="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:mt-18 lg:grid-cols-4 lg:gap-x-0">
@@ -25,8 +25,8 @@ export default function WhatWeDo() {
                                     <circle cx="200" cy="50" r="6" fill="#2586ff" />
                                 </svg>
                             )}
-                            <div className="relative z-10 grid size-24 place-items-center rounded-full bg-[#e7f1ff] text-[#1680ff] lg:size-18">
-                                <Icon aria-hidden="true" className="size-10 lg:size-6" strokeWidth={1.8} />
+                            <div className="relative z-10 grid size-18 place-items-center rounded-full bg-[#e7f1ff] text-[#1680ff] lg:size-18">
+                                <Icon aria-hidden="true" className="size-8 lg:size-6" strokeWidth={1.8} />
                             </div>
                             <span aria-hidden="true" className="mt-4 text-lg font-semibold text-[#747d9e] lg:text-sm">0{index + 1}</span>
                             <h3 className="mt-3 text-xl font-semibold leading-tight tracking-[-0.03em] xl:text-xl">{title}</h3>

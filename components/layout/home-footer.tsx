@@ -4,15 +4,15 @@ import Link from "next/link";
 export const footerResourceLinks = [["Help center", "/help-center"]] as const;
 
 export const footerCompanyLinks = [
-  ["About us", "/about"],
+  // ["About us", "/about"],
   ["Pricing", "/pricing"],
-  ["Cookie preferences", "/cookie-preferences"],
+  ["Cookie Policy", "/cookie-policy"],
 ] as const;
 
 export const footerLegalLinks = [
   ["Terms of Service", "/terms"],
   ["Privacy Policy", "/privacy"],
-  ["Cookie Policy", "/cookie-policy"],
+
 ] as const;
 
 export default function HomeFooter() {
@@ -41,7 +41,7 @@ export default function HomeFooter() {
           <p>
             Copyright {new Date().getFullYear()} Lestow. All rights reserved.
           </p>
-          <div className="flex shrink-0 flex-wrap justify-end gap-6 whitespace-nowrap sm:min-w-[280px]">
+          <div className="flex shrink-0 flex-wrap justify-start gap-6 whitespace-nowrap sm:min-w-[280px] sm:justify-end">
             {footerLegalLinks.map(([label, href]) => (
               <Link key={href} href={href} className="leading-5 hover:text-white">
                 {label}

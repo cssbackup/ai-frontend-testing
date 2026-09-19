@@ -35,7 +35,11 @@ function utcDayKey(now = Date.now()) {
 }
 
 function quotaFilePath() {
-  return path.join(process.cwd(), ".data", "magnific-quota.json");
+  return path.join(
+    /*turbopackIgnore: true*/ process.cwd(),
+    ".data",
+    "magnific-quota.json",
+  );
 }
 
 async function loadQuotaState(): Promise<MagnificQuotaState> {

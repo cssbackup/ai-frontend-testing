@@ -31,7 +31,10 @@ export default function MotionShell({ children }: { children: ReactNode }) {
 
     const context = gsap.context(() => {
       gsap.set("[data-hero-device], [data-workflow-beam], [data-workflow-stage], [data-studio-frame], [data-studio-float], [data-neon-orb], [data-launch-panel]", { force3D: true });
-      gsap.from("[data-hero-line]", {
+      const heroLines = gsap.utils
+        .toArray<HTMLElement>("[data-hero-line]")
+        .filter((line) => line.getClientRects().length > 0);
+      gsap.from(heroLines, {
         yPercent: 115,
         duration: 1.15,
         stagger: 0.1,
@@ -52,7 +55,55 @@ export default function MotionShell({ children }: { children: ReactNode }) {
         ease: "none",
       });
       const heroScroll = root.current?.querySelector<HTMLElement>("[data-hero-scroll]");
-      if (heroScroll) {
+      const compactHero = window.matchMedia("(max-width: 767px)").matches;
+      if (heroScroll && compactHero) {
+        const heroCopy = root.current?.querySelector<HTMLElement>("[data-hero-copy]");
+        gsap.set("[data-hero-device]", {
+          y: 16,
+          scale: 0.86,
+          rotateX: 40,
+          rotateY: -5,
+          transformPerspective: 1400,
+          force3D: true,
+        });
+        if (heroCopy) {
+          gsap.set(heroCopy, {
+            overflow: "hidden",
+            height: heroCopy.offsetHeight,
+          });
+        }
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: heroScroll,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.4,
+            invalidateOnRefresh: true,
+          },
+        })
+          .to("[data-hero-copy]", {
+            y: -24,
+            opacity: 0,
+            height: 0,
+            marginTop: 0,
+            marginBottom: 0,
+            paddingTop: 0,
+            paddingBottom: 0,
+            ease: "none",
+            duration: 0.38,
+          }, 0)
+          .to("[data-scroll-hint]", { opacity: 0, y: 12, ease: "none", duration: 0.14 }, 0)
+          .to("[data-hero-device]", {
+            y: 36,
+            scale: 1,
+            rotateX: 0,
+            rotateY: 0,
+            ease: "none",
+            force3D: true,
+            duration: 0.72,
+          }, 0)
+          .to("[data-dashboard-shine]", { xPercent: 170, ease: "none", duration: 0.55 }, 0.1);
+      } else if (heroScroll) {
         gsap.set("[data-hero-device]", {
           y: 150,
           scale: 0.68,

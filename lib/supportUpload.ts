@@ -21,7 +21,13 @@ function backendPublicUrl() {
 
 function backendUploadsRoot() {
   // apps/frontend|admin -> apps/backend/uploads
-  return path.join(process.cwd(), "..", "backend", "uploads", "support");
+  return path.join(
+    /*turbopackIgnore: true*/ process.cwd(),
+    "..",
+    "backend",
+    "uploads",
+    "support",
+  );
 }
 
 function safeName(name: string) {

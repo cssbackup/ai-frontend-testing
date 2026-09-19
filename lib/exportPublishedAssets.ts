@@ -115,12 +115,26 @@ async function readLocalPublicFile(urlPath: string) {
   if (!normalized || normalized.includes("..")) return null;
 
   const roots = [
-    path.join(process.cwd(), "public"),
-    path.join(process.cwd(), "apps", "frontend", "public"),
-    path.join(process.cwd(), "..", "frontend", "public"),
-    // Monorepo: Next may run from apps/frontend while uploads also live under admin
-    path.join(process.cwd(), "..", "admin", "public"),
-    path.join(process.cwd(), "apps", "admin", "public"),
+    path.join(/*turbopackIgnore: true*/ process.cwd(), "public"),
+    path.join(
+      /*turbopackIgnore: true*/ process.cwd(),
+      "apps",
+      "frontend",
+      "public",
+    ),
+    path.join(
+      /*turbopackIgnore: true*/ process.cwd(),
+      "..",
+      "frontend",
+      "public",
+    ),
+    path.join(/*turbopackIgnore: true*/ process.cwd(), "..", "admin", "public"),
+    path.join(
+      /*turbopackIgnore: true*/ process.cwd(),
+      "apps",
+      "admin",
+      "public",
+    ),
   ];
 
   for (const root of roots) {
