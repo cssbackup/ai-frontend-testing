@@ -29,79 +29,6 @@ function enrichSeo(payload: Record<string, unknown>) {
   };
 }
 
-async function loadDatabaseUrl() {
-  if (process.env.DATABASE_URL) return process.env.DATABASE_URL;
-
-  const candidates = [
-    path.join(/*turbopackIgnore: true*/ process.cwd(), ".env"),
-    path.join(
-      /*turbopackIgnore: true*/ process.cwd(),
-      "apps",
-      "backend",
-      ".env",
-    ),
-    path.join(
-      /*turbopackIgnore: true*/ process.cwd(),
-      "..",
-      "backend",
-      ".env",
-    ),
-    path.join(
-      /*turbopackIgnore: true*/ process.cwd(),
-      "../../apps/backend/.env",
-    ),
-  ];
-
-  for (const envPath of candidates) {
-    try {
-      const text = await readFile(
-        /*turbopackIgnore: true*/ envPath,
-        "utf8",
-      );
-      const match = text.match(/DATABASE_URL=(?:"([^"]+)"|([^\s#]+))/);
-      const value = match?.[1] || match?.[2];
-      if (value) return value;
-    } catch {
-      /* try next */
-    }
-  }
-
-  return null;
-}
-
-async function loadSeoFromDatabase(slug: string) {
-  try {
-    const databaseUrl = await loadDatabaseUrl();
-    if (!databaseUrl) return null;
-
-    const { PrismaClient } = await import("@prisma/client");
-    const prisma = new PrismaClient({
-      datasources: { db: { url: databaseUrl } },
-    });
-    try {
-      const site = await prisma.site.findFirst({
-        where: { slug, published: true },
-        select: { title: true, category: true, config: true },
-      });
-      if (!site) return null;
-      const config =
-        site.config && typeof site.config === "object" && !Array.isArray(site.config)
-          ? (site.config as Record<string, unknown>)
-          : {};
-      return {
-        title: site.title,
-        category: site.category,
-        businessInfo: config.businessInfo ?? null,
-        seo: config.seo ?? null,
-      };
-    } finally {
-      await prisma.$disconnect();
-    }
-  } catch {
-    return null;
-  }
-}
-
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ siteId: string }> },
@@ -145,19 +72,6 @@ export async function GET(
       { error: "Published site not found." },
       { status: 404 },
     );
-  }
-
-  // Always merge SEO/title from Postgres so published <title> stays correct
-  // even when an older Nest build omits seo from the public API.
-  const fromDb = await loadSeoFromDatabase(siteId);
-  if (fromDb) {
-    payload = {
-      ...payload,
-      title: fromDb.title || payload.title,
-      category: fromDb.category || payload.category,
-      businessInfo: fromDb.businessInfo ?? payload.businessInfo ?? null,
-      seo: fromDb.seo ?? payload.seo ?? null,
-    };
   }
 
   return NextResponse.json(enrichSeo(payload));
